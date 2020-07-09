@@ -1,25 +1,29 @@
 import React from "react";
 import { useHistory } from "react-router-dom";
-import { Form, Button, Col, Row } from "react-bootstrap";
+import { Form, Button, Col, Row, Alert } from "react-bootstrap";
 import SignUp from "./SignUp";
 import { handleLogin } from "../services/api";
 
 const SignIn = () => {
   let history = useHistory();
 
+  const [error, setError] = React.useState("");
+
   const handleSignIn = async (e) => {
     e.preventDefault();
     const { username, password } = e.target.elements;
-    try {
+    if (username.value === "esoko" && password.value === "insyt") {
       handleLogin({ username: username.value, password: password.value });
       history.push("/users");
-    } catch (error) {
-      console.error("Error creating user", error);
+    } else {
+      setError(`Invalid login credentials, please try again`);
     }
   };
   return (
-    <Row>
+    <Row className="signup">
       <Col md={5}>
+        {error && <Alert variant="danger">{error}</Alert>}
+
         <h3 className="text-center">Sign In </h3>
         <Form
           className="signup-box px-3 py-3"

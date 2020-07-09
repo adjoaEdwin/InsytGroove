@@ -10,7 +10,7 @@ function App() {
   return (
     <div className="container p-2">
       <Link to="/">
-        <h1>InsytGroove</h1>
+        <h1 className="text-center">InsytGroove</h1>
       </Link>
       <Switch>
         <Route exact path="/" component={Authentication} />
